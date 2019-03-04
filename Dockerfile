@@ -10,10 +10,11 @@ RUN sudo usermod -aG wheel developer && echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> 
 RUN install -m 700 -o developer -g developer -d /run/user/developer
 
 # Add some usfull tools
-RUN dnf install -y gnome-terminal procps-ng dejavu-sans-mono-fonts vim
+RUN dnf install -y gnome-terminal procps-ng psmisc dejavu-sans-mono-fonts vim
 
 USER developer
 WORKDIR /home/developer
+COPY weston.ini /home/developer/.config/weston.ini
 
 COPY /entrypoint.sh /opt
 EXPOSE 3389
